@@ -5,6 +5,17 @@
  */
 package br.senac.sp.tads.pi3a.gerenciador;
 
+import java.security.Timestamp;
+import java.sql.SQLException;
+import java.text.DateFormat;
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
+import java.util.Calendar;
+import java.util.Date;
+import java.util.logging.Level;
+import java.util.logging.Logger;
+import javax.swing.JOptionPane;
+
 /**
  *
  * @author Ana Carolina
@@ -111,7 +122,7 @@ public class cadastrarProduto extends javax.swing.JFrame {
                                     .addComponent(jLabel4)
                                     .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                                     .addComponent(txtPrecoCompra, javax.swing.GroupLayout.PREFERRED_SIZE, 178, javax.swing.GroupLayout.PREFERRED_SIZE))))))
-                .addContainerGap(80, Short.MAX_VALUE))
+                .addContainerGap(95, Short.MAX_VALUE))
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
                 .addGap(0, 0, Short.MAX_VALUE)
                 .addComponent(btnCadastrar)
@@ -179,16 +190,31 @@ public class cadastrarProduto extends javax.swing.JFrame {
         Produto produto = new Produto();
         String nome = txtNome.getText();
         String desc = txtDesc.getText();
-        Float precoCompra = Float.parseFloat(txtPrecoCompra.getText());
-        Float precoVenda = Float.parseFloat(txtPrecoVenda.getText());
-        int quant = Integer.parseInt(txtQtde.getText());
+        Float precoCompra = null, precoVenda = null;
+        int quant = 0;
+        try{
+        precoCompra = Float.parseFloat(txtPrecoCompra.getText());
+        precoVenda = Float.parseFloat(txtPrecoVenda.getText());
+        quant = Integer.parseInt(txtQtde.getText());
+        }catch(NumberFormatException ex){
+            JOptionPane.showMessageDialog(this, "Valor incorreto");
+        }
+        Calendar c = Calendar.getInstance();
         
         produto.setNome(nome);
         produto.setDescricao(desc);
         produto.setPrecoCompra(precoCompra);
         produto.setPrecoVenda(precoVenda);
         produto.setQtde(quant);
+        produto.setDataCadastro(c.getTime());
         
+        DAO cadastro = new DAO();
+        try {
+            cadastro.incluir(produto);
+        } catch (ClassNotFoundException | SQLException ex) {
+            Logger.getLogger(cadastrarProduto.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        System.out.println("CADASTRO REALIZADO");
     }//GEN-LAST:event_btnCadastrarActionPerformed
 
     /**

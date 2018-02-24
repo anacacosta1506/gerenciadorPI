@@ -1,16 +1,17 @@
 package br.senac.sp.tads.pi3a.gerenciador;
 
-import java.security.Timestamp;
+import java.util.Date;
+
 
 public class Produto {
 
     private long id;
     private String nome;
     private String descricao;
-    private float precoCompra;
-    private float precoVenda;
+    private double precoCompra;
+    private double precoVenda;
     private int qtde;
-    private Timestamp dataCadastro;
+    private Date dataCadastro;
 
     public long getId() {
         return id;
@@ -36,19 +37,19 @@ public class Produto {
         this.descricao = descricao;
     }
 
-    public float getPrecoCompra() {
+    public double getPrecoCompra() {
         return precoCompra;
     }
 
-    public void setPrecoCompra(float precoCompra) {
+    public void setPrecoCompra(double precoCompra) {
         this.precoCompra = precoCompra;
     }
 
-    public float getPrecoVenda() {
+    public double getPrecoVenda() {
         return precoVenda;
     }
 
-    public void setPrecoVenda(float precoVenda) {
+    public void setPrecoVenda(double precoVenda) {
         this.precoVenda = precoVenda;
     }
 
@@ -60,11 +61,11 @@ public class Produto {
         this.qtde = qtde;
     }
 
-    public Timestamp getDataCadastro() {
+    public Date getDataCadastro() {
         return dataCadastro;
     }
 
-    public void setDataCadastro(Timestamp dataCadastro) {
+    public void setDataCadastro(Date dataCadastro) {
         this.dataCadastro = dataCadastro;
     }
 
