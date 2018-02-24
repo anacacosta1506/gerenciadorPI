@@ -13,6 +13,7 @@ public class Produto {
     private int qtde;
     private Date dataCadastro;
 
+    
     public long getId() {
         return id;
     }
