@@ -71,6 +71,11 @@ public class cadastrarProduto extends javax.swing.JFrame {
         });
 
         btnCadastrar.setText("Cadastrar");
+        btnCadastrar.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnCadastrarActionPerformed(evt);
+            }
+        });
 
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);
@@ -169,6 +174,22 @@ public class cadastrarProduto extends javax.swing.JFrame {
     private void txtQtdeActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtQtdeActionPerformed
         // TODO add your handling code here:
     }//GEN-LAST:event_txtQtdeActionPerformed
+
+    private void btnCadastrarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnCadastrarActionPerformed
+        Produto produto = new Produto();
+        String nome = txtNome.getText();
+        String desc = txtDesc.getText();
+        Float precoCompra = Float.parseFloat(txtPrecoCompra.getText());
+        Float precoVenda = Float.parseFloat(txtPrecoVenda.getText());
+        int quant = Integer.parseInt(txtQtde.getText());
+        
+        produto.setNome(nome);
+        produto.setDescricao(desc);
+        produto.setPrecoCompra(precoCompra);
+        produto.setPrecoVenda(precoVenda);
+        produto.setQtde(quant);
+        
+    }//GEN-LAST:event_btnCadastrarActionPerformed
 
     /**
      * @param args the command line arguments
