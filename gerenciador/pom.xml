@@ -5,9 +5,29 @@
     <artifactId>gerenciador</artifactId>
     <version>1.0-SNAPSHOT</version>
     <packaging>jar</packaging>
+    <developers>
+        <developer>
+            <id>anacacosta1506</id>
+            <name>Ana Carolina de Araujo
+            Fernanda Santos Rezende
+            Guilherme Ramos Mendes
+            Mauricio Jose da Silva Gregorio</name>
+            <organization>Senac</organization>
+        </developer>
+    </developers>
+    
     <properties>
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
         <maven.compiler.source>1.8</maven.compiler.source>
         <maven.compiler.target>1.8</maven.compiler.target>
     </properties>
+    
+    <dependencies>
+        <dependency>
+            <groupId>mysql</groupId>
+            <artifactId>mysql-connector-java</artifactId>
+            <version>5.1.45</version>
+        </dependency>
+    </dependencies>
+
 </project>
