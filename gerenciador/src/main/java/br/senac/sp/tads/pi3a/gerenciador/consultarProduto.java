@@ -45,7 +45,7 @@ public class consultarProduto extends javax.swing.JFrame {
         tableResult = new javax.swing.JTable();
         jLabel2 = new javax.swing.JLabel();
 
-        setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+        setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
         setTitle("Consultar Produtos");
 
         panelConsultar.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0)));
@@ -76,6 +76,11 @@ public class consultarProduto extends javax.swing.JFrame {
 
             public Class getColumnClass(int columnIndex) {
                 return types [columnIndex];
+            }
+        });
+        tableResult.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                tableResultMouseClicked(evt);
             }
         });
         jScrollPane1.setViewportView(tableResult);
@@ -171,6 +176,14 @@ public class consultarProduto extends javax.swing.JFrame {
         }
 
     }//GEN-LAST:event_btnConsultarActionPerformed
+
+    private void tableResultMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_tableResultMouseClicked
+        cadastrarProduto cadastrar = new cadastrarProduto();
+        cadastrar.setVisible(true);
+        
+        //Precisa pegar as informações que foram selecionadas e adicionar na janela para edição
+        
+    }//GEN-LAST:event_tableResultMouseClicked
 
     /**
      * @param args the command line arguments

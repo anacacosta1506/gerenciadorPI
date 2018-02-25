@@ -9,6 +9,7 @@ import java.sql.SQLException;
 import java.sql.Timestamp;
 import java.util.ArrayList;
 import java.util.List;
+import javax.swing.JOptionPane;
 
 public class DAO {
 
@@ -55,6 +56,9 @@ public class DAO {
             } else if (tipo.equals("Descrição") && !pesquisa.equals("")) {
                 query = "SELECT ID, NOME, DESCRICAO, PRECO_COMPRA, PRECO_VENDA, QUANTIDADE, DT_CADASTRO "
                         + "FROM PRODUTOBD.PRODUTO WHERE DESCRICAO = '" + pesquisa + "'";
+            }else if(!tipo.equals("Selecione....") && pesquisa.isEmpty()){
+            JOptionPane.showMessageDialog(null, "Favor inserir um valor válido para a busca");
+            query = "";
             }
 
             ResultSet resultados = statement.executeQuery(query);
