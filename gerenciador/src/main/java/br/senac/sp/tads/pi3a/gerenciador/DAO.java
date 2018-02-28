@@ -56,9 +56,9 @@ public class DAO {
             } else if (tipo.equals("Descrição") && !pesquisa.equals("")) {
                 query = "SELECT ID, NOME, DESCRICAO, PRECO_COMPRA, PRECO_VENDA, QUANTIDADE, DT_CADASTRO "
                         + "FROM PRODUTOBD.PRODUTO WHERE DESCRICAO = '" + pesquisa + "'";
-            }else if(!tipo.equals("Selecione....") && pesquisa.isEmpty()){
-            JOptionPane.showMessageDialog(null, "Favor inserir um valor válido para a busca");
-            query = "";
+            } else if (!tipo.equals("Selecione....") && pesquisa.isEmpty()) {
+                JOptionPane.showMessageDialog(null, "Favor inserir um valor válido para a busca");
+                query = "";
             }
 
             ResultSet resultados = statement.executeQuery(query);
@@ -80,4 +80,16 @@ public class DAO {
         }
         return lista;
     }
+
+    public void excluirProduto(Long codigo) throws ClassNotFoundException, SQLException {
+        String query = "DELETE FROM PRODUTOBD.PRODUTO WHERE ID = " + codigo;
+
+        try (Connection conn = obterConexao();
+                PreparedStatement statement = conn.prepareStatement(query)) {
+            
+            statement.executeUpdate();
+        }
+
+    }
+
 }

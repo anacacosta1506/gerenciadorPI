@@ -42,9 +42,9 @@ public class cadastrarProduto extends javax.swing.JFrame {
         jLabel1 = new javax.swing.JLabel();
         jLabel2 = new javax.swing.JLabel();
         jLabel3 = new javax.swing.JLabel();
-        jLabel4 = new javax.swing.JLabel();
-        jLabel5 = new javax.swing.JLabel();
-        jLabel6 = new javax.swing.JLabel();
+        jLabelPrecoCompra = new javax.swing.JLabel();
+        jLabelPrecoVenda = new javax.swing.JLabel();
+        jLabelQtd = new javax.swing.JLabel();
         txtNome = new javax.swing.JTextField();
         txtDesc = new javax.swing.JTextField();
         txtPrecoCompra = new javax.swing.JTextField();
@@ -64,11 +64,11 @@ public class cadastrarProduto extends javax.swing.JFrame {
 
         jLabel3.setText("Descrição:");
 
-        jLabel4.setText("Preço da compra:");
+        jLabelPrecoCompra.setText("Preço da compra:");
 
-        jLabel5.setText("Preço da venda:");
+        jLabelPrecoVenda.setText("Preço da venda:");
 
-        jLabel6.setText("Quantidade:");
+        jLabelQtd.setText("Quantidade:");
 
         txtPrecoVenda.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -103,11 +103,11 @@ public class cadastrarProduto extends javax.swing.JFrame {
                         .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
                                 .addGroup(javax.swing.GroupLayout.Alignment.LEADING, jPanel1Layout.createSequentialGroup()
-                                    .addComponent(jLabel6)
+                                    .addComponent(jLabelQtd)
                                     .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                                     .addComponent(txtQtde, javax.swing.GroupLayout.PREFERRED_SIZE, 178, javax.swing.GroupLayout.PREFERRED_SIZE))
                                 .addGroup(javax.swing.GroupLayout.Alignment.LEADING, jPanel1Layout.createSequentialGroup()
-                                    .addComponent(jLabel5)
+                                    .addComponent(jLabelPrecoVenda)
                                     .addGap(18, 18, 18)
                                     .addComponent(txtPrecoVenda, javax.swing.GroupLayout.PREFERRED_SIZE, 178, javax.swing.GroupLayout.PREFERRED_SIZE)))
                             .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
@@ -120,7 +120,7 @@ public class cadastrarProduto extends javax.swing.JFrame {
                                     .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                                     .addComponent(txtDesc, javax.swing.GroupLayout.PREFERRED_SIZE, 178, javax.swing.GroupLayout.PREFERRED_SIZE))
                                 .addGroup(javax.swing.GroupLayout.Alignment.LEADING, jPanel1Layout.createSequentialGroup()
-                                    .addComponent(jLabel4)
+                                    .addComponent(jLabelPrecoCompra)
                                     .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                                     .addComponent(txtPrecoCompra, javax.swing.GroupLayout.PREFERRED_SIZE, 178, javax.swing.GroupLayout.PREFERRED_SIZE))))))
                 .addContainerGap(95, Short.MAX_VALUE))
@@ -144,15 +144,15 @@ public class cadastrarProduto extends javax.swing.JFrame {
                     .addComponent(txtDesc, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(18, 18, 18)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jLabel4)
+                    .addComponent(jLabelPrecoCompra)
                     .addComponent(txtPrecoCompra, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jLabel5)
+                    .addComponent(jLabelPrecoVenda)
                     .addComponent(txtPrecoVenda, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(18, 18, 18)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jLabel6)
+                    .addComponent(jLabelQtd)
                     .addComponent(txtQtde, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(18, 18, 18)
                 .addComponent(btnCadastrar)
@@ -189,33 +189,45 @@ public class cadastrarProduto extends javax.swing.JFrame {
 
     private void btnCadastrarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnCadastrarActionPerformed
         Produto produto = new Produto();
+
         String nome = txtNome.getText();
         String desc = txtDesc.getText();
+
         Float precoCompra = null, precoVenda = null;
+
         int quant = 0;
-        try{
-        precoCompra = Float.parseFloat(txtPrecoCompra.getText());
-        precoVenda = Float.parseFloat(txtPrecoVenda.getText());
-        quant = Integer.parseInt(txtQtde.getText());
-        }catch(NumberFormatException ex){
+
+        try {
+            precoCompra = Float.parseFloat(txtPrecoCompra.getText());
+            precoVenda = Float.parseFloat(txtPrecoVenda.getText());
+            quant = Integer.parseInt(txtQtde.getText());
+        } catch (NumberFormatException ex) {
             JOptionPane.showMessageDialog(this, "Valor incorreto");
         }
+
         Calendar c = Calendar.getInstance();
-        
+
         produto.setNome(nome);
         produto.setDescricao(desc);
         produto.setPrecoCompra(precoCompra);
         produto.setPrecoVenda(precoVenda);
         produto.setQtde(quant);
         produto.setDataCadastro(c.getTime());
-        
+
         DAO cadastro = new DAO();
         try {
             cadastro.incluir(produto);
         } catch (ClassNotFoundException | SQLException ex) {
             Logger.getLogger(cadastrarProduto.class.getName()).log(Level.SEVERE, null, ex);
         }
-        System.out.println("CADASTRO REALIZADO");
+        
+       JOptionPane.showMessageDialog(this, "Cadastro de produto efetuado com sucesso !");
+
+        txtNome.setText("");
+        txtDesc.setText("");
+        txtPrecoCompra.setText("");
+        txtPrecoVenda.setText("");
+        txtQtde.setText("");
     }//GEN-LAST:event_btnCadastrarActionPerformed
 
     /**
@@ -252,15 +264,17 @@ public class cadastrarProduto extends javax.swing.JFrame {
             }
         });
     }
+    
+    
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton btnCadastrar;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
-    private javax.swing.JLabel jLabel4;
-    private javax.swing.JLabel jLabel5;
-    private javax.swing.JLabel jLabel6;
+    private javax.swing.JLabel jLabelPrecoCompra;
+    private javax.swing.JLabel jLabelPrecoVenda;
+    private javax.swing.JLabel jLabelQtd;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JTextField txtDesc;
     private javax.swing.JTextField txtNome;

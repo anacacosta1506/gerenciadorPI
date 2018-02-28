@@ -44,6 +44,8 @@ public class consultarProduto extends javax.swing.JFrame {
         jScrollPane1 = new javax.swing.JScrollPane();
         tableResult = new javax.swing.JTable();
         jLabel2 = new javax.swing.JLabel();
+        btnAlterar = new javax.swing.JButton();
+        btnExcluir = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
         setTitle("Consultar Produtos");
@@ -88,6 +90,22 @@ public class consultarProduto extends javax.swing.JFrame {
         jLabel2.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
         jLabel2.setText("Pesquisar por:");
 
+        btnAlterar.setText("Alterar");
+        btnAlterar.setToolTipText("");
+        btnAlterar.setActionCommand("Alterar");
+        btnAlterar.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnAlterarActionPerformed(evt);
+            }
+        });
+
+        btnExcluir.setText("Excluir");
+        btnExcluir.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnExcluirActionPerformed(evt);
+            }
+        });
+
         javax.swing.GroupLayout panelConsultarLayout = new javax.swing.GroupLayout(panelConsultar);
         panelConsultar.setLayout(panelConsultarLayout);
         panelConsultarLayout.setHorizontalGroup(
@@ -110,6 +128,12 @@ public class consultarProduto extends javax.swing.JFrame {
                 .addGap(236, 236, 236)
                 .addComponent(jLabel1)
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, panelConsultarLayout.createSequentialGroup()
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addComponent(btnExcluir)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addComponent(btnAlterar)
+                .addGap(74, 74, 74))
         );
         panelConsultarLayout.setVerticalGroup(
             panelConsultarLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -124,7 +148,11 @@ public class consultarProduto extends javax.swing.JFrame {
                     .addComponent(jLabel2))
                 .addGap(41, 41, 41)
                 .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 181, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(65, Short.MAX_VALUE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 27, Short.MAX_VALUE)
+                .addGroup(panelConsultarLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(btnAlterar)
+                    .addComponent(btnExcluir))
+                .addContainerGap())
         );
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
@@ -147,11 +175,15 @@ public class consultarProduto extends javax.swing.JFrame {
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
+
     private void btnConsultarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnConsultarActionPerformed
 
         String tipo = (String) comboConsulta.getSelectedItem();
+
         String pesquisa = txtConsulta.getText();
+
         List<Produto> resultado = new ArrayList();
+
         DAO consulta = new DAO();
         try {
             resultado = consulta.consultar(tipo, pesquisa);
@@ -160,7 +192,9 @@ public class consultarProduto extends javax.swing.JFrame {
         }
 
         DefaultTableModel model = (DefaultTableModel) tableResult.getModel();
+
         model.setRowCount(0);
+
         for (int i = 0; i < resultado.size(); i++) {
             long id = resultado.get(i).getId();
             String nome = resultado.get(i).getNome();
@@ -178,12 +212,47 @@ public class consultarProduto extends javax.swing.JFrame {
     }//GEN-LAST:event_btnConsultarActionPerformed
 
     private void tableResultMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_tableResultMouseClicked
-        cadastrarProduto cadastrar = new cadastrarProduto();
-        cadastrar.setVisible(true);
-        
-        //Precisa pegar as informações que foram selecionadas e adicionar na janela para edição
-        
+
     }//GEN-LAST:event_tableResultMouseClicked
+
+    private void btnAlterarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnAlterarActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_btnAlterarActionPerformed
+
+    private void btnExcluirActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnExcluirActionPerformed
+        if (tableResult.getSelectedRow() >= 0) {
+
+            final int row = tableResult.getSelectedRow();
+
+            String nomeProduto = (String) tableResult.getValueAt(row, 1);
+
+            int resposta = JOptionPane.showConfirmDialog(rootPane,
+                    "Excluir o produto \"" + nomeProduto + "\"?",
+                    "Confirmar exclusão", JOptionPane.YES_NO_OPTION);
+
+            if (resposta == JOptionPane.YES_OPTION) {
+                try {
+
+                    Long codigo = (Long) tableResult.getValueAt(row, 0);
+
+                    DAO dao = new DAO();
+
+                    dao.excluirProduto(codigo);
+                    
+                    JOptionPane.showMessageDialog(null, "Produto Excluído com Sucesso !");
+                    
+                } catch (Exception ex) {
+                    ex.printStackTrace();
+                    
+                    JOptionPane.showMessageDialog(rootPane, ex.getMessage(),
+                            "Falha na Exclusão", JOptionPane.ERROR_MESSAGE);
+
+                }
+            }
+
+        }
+
+    }//GEN-LAST:event_btnExcluirActionPerformed
 
     /**
      * @param args the command line arguments
@@ -221,7 +290,9 @@ public class consultarProduto extends javax.swing.JFrame {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JButton btnAlterar;
     private javax.swing.JButton btnConsultar;
+    private javax.swing.JButton btnExcluir;
     private javax.swing.JComboBox<String> comboConsulta;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
