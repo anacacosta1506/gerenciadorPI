@@ -40,6 +40,29 @@ public class DAO {
             statement.executeUpdate();
         }
     }
+    
+        public List<Categoria> receberCategorias() throws ClassNotFoundException, SQLException {
+        String query = "SELECT * FROM PRODUTOBD.CATEGORIA";
+
+        List<Categoria> lista = new ArrayList<Categoria>();
+
+        try (Connection conn = obterConexao();
+                PreparedStatement statement = conn.prepareStatement(query)) {
+
+            ResultSet resultados = statement.executeQuery(query);
+
+            while (resultados.next()) {
+                Categoria categoria = new Categoria();
+                categoria.setId(resultados.getInt("ID"));
+                categoria.setNome(resultados.getString("NOME"));
+                lista.add(categoria);
+            }
+
+        } catch (Exception e) {
+
+        }
+        return lista;
+    }
 
     public List<Produto> consultar(String tipo, String pesquisa) throws ClassNotFoundException, SQLException {
         String query = "SELECT ID, NOME, DESCRICAO, PRECO_COMPRA, PRECO_VENDA, QUANTIDADE, DT_CADASTRO "
