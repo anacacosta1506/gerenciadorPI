@@ -46,6 +46,7 @@ public class consultarProduto extends javax.swing.JFrame {
         jLabel2 = new javax.swing.JLabel();
         btnAlterar = new javax.swing.JButton();
         btnExcluir = new javax.swing.JButton();
+        btnCancelar = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
         setTitle("Consultar Produtos");
@@ -56,6 +57,11 @@ public class consultarProduto extends javax.swing.JFrame {
         jLabel1.setText("Consultar Produto");
 
         comboConsulta.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Selecione....", "Nome", "Descrição" }));
+        comboConsulta.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                comboConsultaActionPerformed(evt);
+            }
+        });
 
         btnConsultar.setText("Consultar");
         btnConsultar.addActionListener(new java.awt.event.ActionListener() {
@@ -92,7 +98,6 @@ public class consultarProduto extends javax.swing.JFrame {
 
         btnAlterar.setText("Alterar");
         btnAlterar.setToolTipText("");
-        btnAlterar.setActionCommand("Alterar");
         btnAlterar.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 btnAlterarActionPerformed(evt);
@@ -103,6 +108,14 @@ public class consultarProduto extends javax.swing.JFrame {
         btnExcluir.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 btnExcluirActionPerformed(evt);
+            }
+        });
+
+        btnCancelar.setText("Cancelar");
+        btnCancelar.setToolTipText("");
+        btnCancelar.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnCancelarActionPerformed(evt);
             }
         });
 
@@ -131,9 +144,11 @@ public class consultarProduto extends javax.swing.JFrame {
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, panelConsultarLayout.createSequentialGroup()
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addComponent(btnExcluir)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(btnAlterar)
-                .addGap(74, 74, 74))
+                .addGap(23, 23, 23)
+                .addComponent(btnCancelar)
+                .addGap(11, 11, 11))
         );
         panelConsultarLayout.setVerticalGroup(
             panelConsultarLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -147,11 +162,12 @@ public class consultarProduto extends javax.swing.JFrame {
                     .addComponent(btnConsultar)
                     .addComponent(jLabel2))
                 .addGap(41, 41, 41)
-                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 181, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 27, Short.MAX_VALUE)
+                .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 181, Short.MAX_VALUE)
+                .addGap(27, 27, 27)
                 .addGroup(panelConsultarLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(btnAlterar)
-                    .addComponent(btnExcluir))
+                    .addComponent(btnExcluir)
+                    .addComponent(btnCancelar))
                 .addContainerGap())
         );
 
@@ -161,15 +177,15 @@ public class consultarProduto extends javax.swing.JFrame {
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
                 .addContainerGap()
-                .addComponent(panelConsultar, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addComponent(panelConsultar, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addContainerGap())
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
                 .addContainerGap()
-                .addComponent(panelConsultar, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(26, Short.MAX_VALUE))
+                .addComponent(panelConsultar, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addGap(26, 26, 26))
         );
 
         pack();
@@ -206,7 +222,7 @@ public class consultarProduto extends javax.swing.JFrame {
             model.addRow(new Object[]{id, nome, descricao, precoCompra, precoVenda, quant, data});
         }
         if (resultado.isEmpty()) {
-            JOptionPane.showMessageDialog(null, "Nenhum cliente encontrado!");
+            JOptionPane.showMessageDialog(null, "Nenhum Produto encontrado!");
         }
 
     }//GEN-LAST:event_btnConsultarActionPerformed
@@ -254,6 +270,14 @@ public class consultarProduto extends javax.swing.JFrame {
 
     }//GEN-LAST:event_btnExcluirActionPerformed
 
+    private void btnCancelarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnCancelarActionPerformed
+       this.dispose();
+    }//GEN-LAST:event_btnCancelarActionPerformed
+
+    private void comboConsultaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_comboConsultaActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_comboConsultaActionPerformed
+
     /**
      * @param args the command line arguments
      */
@@ -291,6 +315,7 @@ public class consultarProduto extends javax.swing.JFrame {
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton btnAlterar;
+    private javax.swing.JButton btnCancelar;
     private javax.swing.JButton btnConsultar;
     private javax.swing.JButton btnExcluir;
     private javax.swing.JComboBox<String> comboConsulta;
