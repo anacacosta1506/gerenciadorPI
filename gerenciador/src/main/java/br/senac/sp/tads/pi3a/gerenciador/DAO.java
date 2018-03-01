@@ -81,12 +81,30 @@ public class DAO {
         return lista;
     }
 
+    public void editar(Produto produto) throws ClassNotFoundException, SQLException {
+        String query = "UPDATE PRODUTOBD.PRODUTO SET "
+                + "NOME = '" + produto.getNome() + "'" + ", "
+                + "DESCRICAO = '" + produto.getDescricao() + "'" + ", "
+                + "PRECO_COMPRA = '" + produto.getPrecoCompra() + "'" + ", "
+                + "PRECO_VENDA = '" + produto.getPrecoVenda() + "'" + ", "
+                + "QUANTIDADE = '" + produto.getQtde() + "'" + ", "
+                + "DT_CADASTRO = '" + produto.getDataCadastro() + "'" + ", "
+                + "WHERE ID = '" + produto.getId() + "'";
+        System.out.println(query);
+        try (Connection conn = obterConexao();
+                PreparedStatement statement = conn.prepareStatement(query)) {
+            statement.executeUpdate();
+        } catch (Exception e) {
+
+        }
+    }
+
     public void excluirProduto(Long codigo) throws ClassNotFoundException, SQLException {
         String query = "DELETE FROM PRODUTOBD.PRODUTO WHERE ID = " + codigo;
 
         try (Connection conn = obterConexao();
                 PreparedStatement statement = conn.prepareStatement(query)) {
-            
+
             statement.executeUpdate();
         }
 
