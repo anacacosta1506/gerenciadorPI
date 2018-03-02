@@ -38,6 +38,8 @@ public class DAO {
             statement.setTimestamp(6, t);
 
             statement.executeUpdate();
+        }catch(Exception ex){
+            
         }
     }
     
@@ -58,7 +60,7 @@ public class DAO {
                 lista.add(categoria);
             }
 
-        } catch (Exception e) {
+        } catch (Exception ex) {
 
         }
         return lista;
@@ -98,26 +100,26 @@ public class DAO {
                 lista.add(produto);
             }
 
-        } catch (Exception e) {
+        } catch (Exception ex) {
 
         }
         return lista;
     }
 
-    public void editar(Produto produto) throws ClassNotFoundException, SQLException {
+    public void editar(Long codigo, String desc,String nome,double precoCompra,double precoVenda,int qtde,String data ) throws ClassNotFoundException, SQLException {
         String query = "UPDATE PRODUTOBD.PRODUTO SET "
-                + "NOME = '" + produto.getNome() + "'" + ", "
-                + "DESCRICAO = '" + produto.getDescricao() + "'" + ", "
-                + "PRECO_COMPRA = '" + produto.getPrecoCompra() + "'" + ", "
-                + "PRECO_VENDA = '" + produto.getPrecoVenda() + "'" + ", "
-                + "QUANTIDADE = '" + produto.getQtde() + "'" + ", "
-                + "DT_CADASTRO = '" + produto.getDataCadastro() + "'" + ", "
-                + "WHERE ID = '" + produto.getId() + "'";
+                + "NOME = '" + nome + "'" + ", "
+                + "DESCRICAO = '" + desc + "'" + ", "
+                + "PRECO_COMPRA = " + precoCompra + ", "
+                + "PRECO_VENDA = " + precoVenda  + ", "
+                + "QUANTIDADE = '" + qtde + "'" + ", "
+                + "DT_CADASTRO = '" + data + "'" + ", "
+                + "WHERE ID = " + codigo;
         System.out.println(query);
         try (Connection conn = obterConexao();
                 PreparedStatement statement = conn.prepareStatement(query)) {
             statement.executeUpdate();
-        } catch (Exception e) {
+        } catch (Exception ex) {
 
         }
     }
@@ -129,6 +131,8 @@ public class DAO {
                 PreparedStatement statement = conn.prepareStatement(query)) {
 
             statement.executeUpdate();
+        }catch(Exception ex){
+            
         }
 
     }
