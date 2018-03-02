@@ -311,7 +311,7 @@ public class EditarProduto extends javax.swing.JFrame {
          try {
                     DAO dao = new DAO();
 
-                    dao.editar(codigo, desc, nome, precoCompra, precoVenda, qtde, data);
+                    dao.editar(produto);
 
                     JOptionPane.showMessageDialog(null, "Produto Editado com Sucesso !");
                     this.dispose();

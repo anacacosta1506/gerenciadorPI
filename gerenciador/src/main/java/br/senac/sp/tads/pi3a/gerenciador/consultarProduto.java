@@ -232,7 +232,42 @@ public class consultarProduto extends javax.swing.JFrame {
     }//GEN-LAST:event_tableResultMouseClicked
 
     private void btnAlterarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnAlterarActionPerformed
-        // TODO add your handling code here:
+        cadastrarProduto atualizar = new cadastrarProduto();
+        atualizar.setLocationRelativeTo(null);
+
+        String tipo = (String) comboConsulta.getSelectedItem();
+        String pesquisa = txtConsulta.getText();
+
+        int row = tableResult.getSelectedRow();
+        String name = (String) tableResult.getValueAt(row, 1);
+        String descricao = (String) tableResult.getValueAt(row, 2);
+
+        List<Produto> resultados = null;
+        DAO dao = new DAO();
+        try {
+            resultados = dao.consultar(tipo, pesquisa);
+        } catch (Exception ex) {
+        }
+        Produto produto = resultados.get(0);
+
+        for (int i = 0; i < resultados.size(); i++) {
+            String nome = resultados.get(i).getNome();
+            String desc = resultados.get(i).getDescricao();
+            if (nome.equals(name) && desc.equals(descricao)) {
+                produto = resultados.get(i);
+            }
+        }
+
+        atualizar.setTitle("Atualizar Produto");
+        atualizar.setVisible(true);
+        atualizar.txtNome.setText(produto.getNome());
+        atualizar.txtDesc.setText(produto.getDescricao());
+        atualizar.txtPrecoCompra.setText(Double.toString(produto.getPrecoCompra()));
+        atualizar.txtPrecoVenda.setText(Double.toString(produto.getPrecoVenda()));
+        atualizar.txtQtde.setText(Integer.toString(produto.getQtde()));
+        atualizar.txtCod.setText(Long.toString(produto.getId()));
+        atualizar.editar = true;
+        
     }//GEN-LAST:event_btnAlterarActionPerformed
 
     private void btnExcluirActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnExcluirActionPerformed
@@ -254,12 +289,12 @@ public class consultarProduto extends javax.swing.JFrame {
                     DAO dao = new DAO();
 
                     dao.excluirProduto(codigo);
-                    
+
                     JOptionPane.showMessageDialog(null, "Produto Excluído com Sucesso !");
-                    
+
                 } catch (Exception ex) {
                     ex.printStackTrace();
-                    
+
                     JOptionPane.showMessageDialog(rootPane, ex.getMessage(),
                             "Falha na Exclusão", JOptionPane.ERROR_MESSAGE);
 
@@ -271,7 +306,7 @@ public class consultarProduto extends javax.swing.JFrame {
     }//GEN-LAST:event_btnExcluirActionPerformed
 
     private void btnCancelarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnCancelarActionPerformed
-       this.dispose();
+        this.dispose();
     }//GEN-LAST:event_btnCancelarActionPerformed
 
     private void comboConsultaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_comboConsultaActionPerformed
