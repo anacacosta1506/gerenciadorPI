@@ -122,14 +122,14 @@ public class telaPrincipal extends javax.swing.JFrame {
     }//GEN-LAST:event_menuCadastrarActionPerformed
 
     private void jMenuItem1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem1ActionPerformed
-        CadastrarProduto cadastrar = new CadastrarProduto();
+        cadastrarProduto cadastrar = new cadastrarProduto();
         cadastrar.setLocationRelativeTo(null);
         cadastrar.setVisible(true);
         
     }//GEN-LAST:event_jMenuItem1ActionPerformed
 
     private void jMenuItem2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem2ActionPerformed
-        ConsultarProduto consultar = new ConsultarProduto();
+        consultarProduto consultar = new consultarProduto();
         consultar.setLocationRelativeTo(null);
         consultar.setVisible(true);
     }//GEN-LAST:event_jMenuItem2ActionPerformed

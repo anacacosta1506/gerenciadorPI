@@ -106,15 +106,17 @@ public class DAO {
         return lista;
     }
 
-    public void editar(Long codigo, String desc,String nome,double precoCompra,double precoVenda,int qtde,String data ) throws ClassNotFoundException, SQLException {
+    public void editar(Produto produto) throws ClassNotFoundException, SQLException {
+        Timestamp t = new Timestamp(produto.getDataCadastro().getTime());
         String query = "UPDATE PRODUTOBD.PRODUTO SET "
-                + "NOME = '" + nome + "'" + ", "
-                + "DESCRICAO = '" + desc + "'" + ", "
-                + "PRECO_COMPRA = " + precoCompra + ", "
-                + "PRECO_VENDA = " + precoVenda  + ", "
-                + "QUANTIDADE = '" + qtde + "'" + ", "
-                + "DT_CADASTRO = '" + data + "'" + ", "
-                + "WHERE ID = " + codigo;
+                + "NOME = '" + produto.getNome() + "'" + ", "
+                + "DESCRICAO = '" + produto.getDescricao() + "'" + ", "
+                + "PRECO_COMPRA = '" + produto.getPrecoCompra() + "'" + ", "
+                + "PRECO_VENDA = '" + produto.getPrecoVenda() + "'" + ", "
+                + "QUANTIDADE = '" + produto.getQtde() + "'" + ", "
+                
+                + "DT_CADASTRO = '" + t + "'" + " "
+                + "WHERE ID = '" + produto.getId() + "'";
         System.out.println(query);
         try (Connection conn = obterConexao();
                 PreparedStatement statement = conn.prepareStatement(query)) {
